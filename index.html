@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vikas M — MedCircuit Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- FLOATING PARTICLES LAYER -->
+  <div class="particles" id="particles"></div>
+
+  <!-- ECG Header Bar -->
+  <div class="ecg-bar">
+    <svg class="ecg-svg" viewBox="0 0 1200 60" preserveAspectRatio="none">
+      <polyline class="ecg-line" points="0,30 80,30 90,30 95,8 100,52 105,30 115,30 195,30 205,30 210,8 215,52 220,30 230,30 310,30 320,30 325,8 330,52 335,30 345,30 425,30 435,30 440,8 445,52 450,30 460,30 540,30 550,30 555,8 560,52 565,30 575,30 655,30 665,30 670,8 675,52 680,30 690,30 770,30 780,30 785,8 790,52 795,30 805,30 885,30 895,30 900,8 905,52 910,30 920,30 1000,30 1010,30 1015,8 1020,52 1025,30 1035,30 1200,30"/>
+    </svg>
+    <!-- Vital signs readout -->
+    <div class="vital-readout">
+      <span class="vr-item"><span class="vr-label">HR</span> <span class="vr-val green" id="hr-val">72</span> <span class="vr-unit">bpm</span></span>
+      <span class="vr-sep">|</span>
+      <span class="vr-item"><span class="vr-label">SpO2</span> <span class="vr-val blue">98</span> <span class="vr-unit">%</span></span>
+      <span class="vr-sep">|</span>
+      <span class="vr-item"><span class="vr-label">SYS</span> <span class="vr-val">NOMINAL</span></span>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">VIKAS <span>M</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#certifications">Certs</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <canvas id="circuit-canvas"></canvas>
+    <!-- Heartbeat line across hero -->
+    <div class="hero-ecg-strip">
+      <svg viewBox="0 0 800 80" preserveAspectRatio="none">
+        <polyline class="hero-ecg-line" points="0,40 60,40 70,40 78,10 85,70 92,40 100,40 160,40 170,40 178,10 185,70 192,40 200,40 260,40 270,40 278,10 285,70 292,40 300,40 360,40 370,40 378,10 385,70 392,40 400,40 460,40 470,40 478,10 485,70 492,40 500,40 560,40 570,40 578,10 585,70 592,40 600,40 660,40 670,40 678,10 685,70 692,40 700,40 800,40"/>
+      </svg>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        SYSTEM ONLINE
+      </div>
+      <h1 class="hero-name">VIKAS M</h1>
+      <div class="hero-titles">
+        <span class="typing-text" id="typed-text"></span><span class="cursor">|</span>
+      </div>
+      <p class="hero-tagline">Engineering the future of Smart Healthcare &amp; Embedded Systems</p>
+
+      <!-- Chip / component visual -->
+      <div class="hero-chip">
+        <div class="chip-body">
+          <div class="chip-label">MCU_VIKAS_v1.0</div>
+          <div class="chip-pins left">
+            <div class="pin"><span class="pin-label">VCC</span></div>
+            <div class="pin"><span class="pin-label">GND</span></div>
+            <div class="pin"><span class="pin-label">SDA</span></div>
+            <div class="pin"><span class="pin-label">SCL</span></div>
+          </div>
+          <div class="chip-pins right">
+            <div class="pin"><span class="pin-label">TX</span></div>
+            <div class="pin"><span class="pin-label">RX</span></div>
+            <div class="pin"><span class="pin-label">ADC</span></div>
+            <div class="pin"><span class="pin-label">PWM</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-vitals">
+        <div class="vital-chip">📍 Bengaluru, India</div>
+        <div class="vital-chip">🎓 MSRIT — Medical Electronics</div>
+        <div class="vital-chip pulse-chip">🟢 Open to Opportunities</div>
+      </div>
+
+      <!-- Clickable stat pills -->
+      <div class="hero-stats">
+        <a href="#experience" class="stat-pill">
+          <div class="stat-pill-num">4+</div>
+          <div class="stat-pill-lbl">Internships</div>
+        </a>
+        <a href="#certifications" class="stat-pill">
+          <div class="stat-pill-num">9+</div>
+          <div class="stat-pill-lbl">Certifications</div>
+        </a>
+        <a href="#skills" class="stat-pill">
+          <div class="stat-pill-num">30+</div>
+          <div class="stat-pill-lbl">Skills</div>
+        </a>
+      </div>
+
+      <a href="#about" class="cta-btn">Initialize Profile ⚡</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section" id="about">
+    <div class="section-header">
+      <div class="section-label">// NODE_01</div>
+      <h2>About Me</h2>
+      <div class="trace-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-photo-wrap">
+        <div class="photo-circuit-frame">
+          <div class="pcb-corner tl"></div>
+          <div class="pcb-corner tr"></div>
+          <div class="pcb-corner bl"></div>
+          <div class="pcb-corner br"></div>
+          <img src="photo.jpg" alt="Vikas M" class="about-photo" onerror="this.style.display='none'"/>
+          <div class="photo-overlay-text">VIKAS_M.exe</div>
+        </div>
+      </div>
+      <div class="about-text">
+        <p id="about-text-content"></p>
+        <div class="stat-row">
+          <a href="#experience" class="stat-box">
+            <div class="stat-num" id="stat-internships">0</div>
+            <div class="stat-label">Internships</div>
+          </a>
+          <a href="#certifications" class="stat-box">
+            <div class="stat-num" id="stat-certs">0</div>
+            <div class="stat-label">Certifications</div>
+          </a>
+          <a href="#skills" class="stat-box">
+            <div class="stat-num" id="stat-skills">0</div>
+            <div class="stat-label">Skills</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="section dark-section" id="skills">
+    <div class="section-header">
+      <div class="section-label">// NODE_02</div>
+      <h2>Technical Skills</h2>
+      <div class="trace-line"></div>
+    </div>
+    <div class="skills-grid" id="skills-grid"></div>
+  </section>
+
+  <!-- Experience Section -->
+  <section class="section" id="experience">
+    <div class="section-header">
+      <div class="section-label">// NODE_03</div>
+      <h2>Experience</h2>
+      <div class="trace-line"></div>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </section>
+
+  <!-- Certifications -->
+  <section class="section dark-section" id="certifications">
+    <div class="section-header">
+      <div class="section-label">// NODE_04</div>
+      <h2>Certifications</h2>
+      <div class="trace-line"></div>
+    </div>
+    <div class="certs-grid" id="certs-grid"></div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section" id="contact">
+    <div class="section-header">
+      <div class="section-label">// NODE_05</div>
+      <h2>Contact</h2>
+      <div class="trace-line"></div>
+    </div>
+    <div class="contact-box">
+      <p>Ready to collaborate? Let's build something meaningful.</p>
+      <!-- Gmail link — opens Gmail compose, not Outlook -->
+      <a href="https://mail.google.com/mail/?view=cm&to=vikas.mdpraveen@gmail.com" target="_blank" class="cta-btn">Send Signal ⚡</a>
+      <div class="social-links">
+        <a href="https://linkedin.com/in/vikas-m-280a87355" target="_blank" class="social-chip">LinkedIn</a>
+        <a href="https://github.com/vik-codex" target="_blank" class="social-chip">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-ecg">
+      <svg class="ecg-svg" viewBox="0 0 1200 40" preserveAspectRatio="none" style="height:40px;">
+        <polyline class="ecg-line-footer" points="0,20 80,20 90,20 95,4 100,36 105,20 115,20 300,20 310,20 315,4 320,36 325,20 335,20 600,20 610,20 615,4 620,36 625,20 635,20 900,20 910,20 915,4 920,36 925,20 935,20 1200,20"/>
+      </svg>
+    </div>
+    <p>⚡ Designed &amp; Built by Vikas M — MedCircuit Portfolio</p>
+  </footer>
+
+  <!-- CERTIFICATE MODAL -->
+  <div class="cert-modal-overlay" id="cert-modal" onclick="closeCertModal(event)">
+    <div class="cert-modal-box">
+      <button class="cert-modal-close" onclick="closeCertModalBtn()">✕ CLOSE</button>
+      <div class="cert-modal-icon" id="m-icon"></div>
+      <div class="cert-modal-name" id="m-name"></div>
+      <div class="cert-modal-issuer" id="m-issuer"></div>
+      <div class="cert-modal-date" id="m-date"></div>
+      <div class="cert-modal-img-wrap">
+        <img id="m-img" src="" alt="Certificate" style="width:100%;border-radius:6px;display:block;"/>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
