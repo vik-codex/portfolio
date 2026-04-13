@@ -75,7 +75,7 @@ const portfolioData = {
     {
       name: "Power BI Workshop",
       issuer: "Power BI / OfficeMaster", date: "May 2025", icon: "🟢",
-    certImage: "powerbi"
+    certImage: "powerbi.jpg"
     },
     {
       name: "Siemens Mobility Operations Simulation",
