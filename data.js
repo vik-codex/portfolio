@@ -91,7 +91,7 @@ const portfolioData = {
       name: "Goldman Sachs internal Audit",
       issuer: "Goldan Sachs" , date: "April 2026", icon: "🗃️",
       certimage: "gs.jpg"
-    }
+    },
   ]
 
 };
