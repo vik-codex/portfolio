@@ -92,6 +92,41 @@ const portfolioData = {
       issuer: "Goldan Sachs" , date: "April 2026", icon: "🗃️",
       certimage: "gs.jpg"
     }
-  ]
+  ],
+  projects: [
+    {
+      name: "ECG Signal Visualizer",
+      tech: "Python • Signal Processing",
+      image: "ecg.png",
+      description: [
+        "Real time ECG processing",
+        "Butterworth filtering",
+        "R peak detection & HRV"
+      ],
+      link: "https://github.com/vik-codex/ecg-signal-visualizer"
+    }
+  ],
 
+  jobs: [
+    {
+      name: "Deloitte Job Simulation",
+      issuer: "Deloitte",
+      image: "deloitte.jpg",
+      points: [
+        "Solved business cases",
+        "Used data analysis",
+        "Improved decision making"
+      ]
+    },
+    {
+      name: "Siemens Job Simulation",
+      issuer: "Siemens",
+      image: "siemens.jpg",
+      points: [
+        "Optimized workflows",
+        "Analyzed bottlenecks",
+        "Applied engineering concepts"
+      ]
+    }
+  ]
 };
