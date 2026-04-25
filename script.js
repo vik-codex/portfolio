@@ -223,6 +223,56 @@ d.certifications.forEach(function (cert, i) {
   certsGrid.appendChild(card);
 });
 
+// ── PROJECTS ─────────────────────────────────────────────────────────────
+var projectsGrid = document.getElementById('projects-grid');
+if (projectsGrid && d.projects) {
+  d.projects.forEach(function (project) {
+    var card = document.createElement('div');
+    card.className = 'showcase-card';
+    card.innerHTML =
+      '<div class="showcase-top">' +
+        '<div>' +
+          '<div class="showcase-name">' + project.name + '</div>' +
+          '<div class="showcase-meta">' + project.tech + '</div>' +
+        '</div>' +
+        (project.link ? '<a class="showcase-link" target="_blank" href="' + project.link + '">Open ↗</a>' : '') +
+      '</div>' +
+      '<ul class="showcase-points">' +
+        project.description.map(function (line) { return '<li>' + line + '</li>'; }).join('') +
+      '</ul>' +
+      '<div class="showcase-images">' +
+        project.images.map(function (img, idx) {
+          return '<img src="' + img + '" alt="' + project.name + ' output ' + (idx + 1) + '" loading="lazy"/>';
+        }).join('') +
+      '</div>';
+    projectsGrid.appendChild(card);
+  });
+}
+
+// ── JOB SIMULATIONS ──────────────────────────────────────────────────────
+var jobsGrid = document.getElementById('jobs-grid');
+if (jobsGrid && d.jobs) {
+  d.jobs.forEach(function (job) {
+    var card = document.createElement('div');
+    card.className = 'showcase-card';
+    card.innerHTML =
+      '<div class="showcase-top">' +
+        '<div class="showcase-name">' + job.name + '</div>' +
+        '<div class="showcase-meta">' + job.issuer + '</div>' +
+      '</div>' +
+      '<ul class="showcase-points">' +
+        job.points.map(function (line) { return '<li>' + line + '</li>'; }).join('') +
+      '</ul>' +
+      '<div class="showcase-images">' +
+        '<img src="' + job.image + '" alt="' + job.name + ' certificate" loading="lazy"/>' +
+      '</div>';
+    card.addEventListener('click', function () {
+      openModal({ icon: '📜', name: job.name, issuer: job.issuer, date: job.date || '', image: job.image });
+    });
+    jobsGrid.appendChild(card);
+  });
+}
+
 // ── MODAL ─────────────────────────────────────────────────────────────────
 var modal = document.getElementById('cert-modal');
 
@@ -231,7 +281,7 @@ function openModal(cert) {
   document.getElementById('m-name').textContent   = cert.name;
   document.getElementById('m-issuer').textContent = cert.issuer;
   document.getElementById('m-date').textContent   = cert.date;
-  document.getElementById('m-img').src            = cert.certImage;
+  document.getElementById('m-img').src            = cert.certImage || cert.image || '';
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -266,7 +316,7 @@ var observer  = new IntersectionObserver(function (entries) {
   });
 }, { threshold: 0.12 });
 
-document.querySelectorAll('.timeline-item, .cert-card').forEach(function (el) {
+document.querySelectorAll('.timeline-item, .cert-card, .showcase-card').forEach(function (el) {
   observer.observe(el);
 });
 var aboutEl = document.getElementById('about');
