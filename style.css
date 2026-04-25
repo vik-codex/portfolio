@@ -811,6 +811,79 @@ body {
   margin-top: 2px;
 }
 
+/* ── PROJECTS / JOBS ───────────────────────────────────────────────────── */
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 22px;
+}
+.showcase-card {
+  background: linear-gradient(180deg, rgba(13,36,25,0.9), rgba(10,28,20,0.9));
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  padding: 18px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, opacity 0.35s ease;
+}
+.showcase-card.visible { opacity: 1; transform: translateY(0); }
+.showcase-card:hover {
+  border-color: var(--green);
+  box-shadow: 0 10px 30px rgba(0,255,136,0.14);
+}
+.showcase-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.showcase-name {
+  font-size: 1.08rem;
+  color: var(--green);
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+.showcase-meta {
+  color: var(--blue);
+  font-size: 0.76rem;
+  letter-spacing: 2px;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+.showcase-link {
+  color: var(--green);
+  text-decoration: none;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  border: 1px solid var(--green);
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.showcase-points { list-style: none; margin: 10px 0 14px; }
+.showcase-points li {
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  padding-left: 14px;
+  position: relative;
+}
+.showcase-points li::before { content: '▸'; position: absolute; left: 0; color: var(--teal); }
+.showcase-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+}
+.showcase-images img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  background: rgba(0,0,0,0.2);
+}
+
 /* ── CONTACT ──────────────────────────────────────────── */
 .contact-box { text-align: center; padding: 56px 20px; }
 .contact-desc {

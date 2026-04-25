@@ -89,19 +89,19 @@ const portfolioData = {
     },
     {
       name: "Goldman Sachs internal Audit",
-      issuer: "Goldan Sachs" , date: "April 2026", icon: "🗃️",
-      certimage: "gs.jpg"
+      issuer: "Goldman Sachs", date: "Apr 2026", icon: "🗃️",
+      certImage: "gs.jpg"
     }
   ],
   projects: [
     {
       name: "ECG Signal Visualizer",
-      tech: "Python • Signal Processing",
-      image: "ecg.png",
+      tech: "Python • NumPy • SciPy • Matplotlib",
+      images: ["output 1.png", "output 2.png", "output 3.png"],
       description: [
-        "Real time ECG processing",
-        "Butterworth filtering",
-        "R peak detection & HRV"
+        "Built an ECG analysis pipeline to clean noisy ECG signals and visualize waveform quality in a clinical-style dashboard.",
+        "Applied bandpass filtering and Pan–Tompkins based R-peak detection to identify beats with stable timing and high accuracy.",
+        "Computed HRV and spectral trends, then summarized heart-rate behavior with clear plots for interpretation and reporting."
       ],
       link: "https://github.com/vik-codex/ecg-signal-visualizer"
     }
@@ -109,23 +109,36 @@ const portfolioData = {
 
   jobs: [
     {
-      name: "Deloitte Job Simulation",
-      issuer: "Deloitte",
-      image: "deloitte.jpg",
+      name: "Goldman Sachs Job Simulation",
+      issuer: "Goldman Sachs",
+      date: "Apr 2026",
+      image: "gs.jpg",
       points: [
-        "Solved business cases",
-        "Used data analysis",
-        "Improved decision making"
+        "Completed practical internal-audit tasks focused on risk assessment across Global Banking & Markets.",
+        "Reviewed controls and mapped audit observations using a structured evidence-based workflow.",
+        "Strengthened reporting clarity by documenting findings, priorities, and follow-up recommendations."
       ]
     },
     {
-      name: "Siemens Job Simulation",
-      issuer: "Siemens",
-      image: "siemens.jpg",
+      name: "Deloitte Job Simulation",
+      issuer: "Deloitte",
+      date: "Feb 2026",
+      image: "deloitte.jpg",
       points: [
-        "Optimized workflows",
-        "Analyzed bottlenecks",
-        "Applied engineering concepts"
+        "Worked through consulting-style analytics scenarios and converted raw business data into decision-ready insights.",
+        "Built structured problem-solving approaches for data interpretation, validation, and presentation.",
+        "Delivered outcome-focused recommendations aligned with practical business and operational goals."
+      ]
+    },
+    {
+      name: "Simons Job Simulation",
+      issuer: "Simons",
+      date: "2026",
+      image: "outskill.jpg",
+      points: [
+        "Completed simulation tasks emphasizing quantitative thinking, pattern analysis, and disciplined execution.",
+        "Practiced translating technical observations into concise summaries suitable for stakeholder review.",
+        "Improved consistency in documentation, prioritization, and communication under deadline-oriented tasks."
       ]
     }
   ]
