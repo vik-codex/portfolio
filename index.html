@@ -55,7 +55,9 @@
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
     <li><a href="#certifications">Certs</a></li>
+    <li><a href="#jobsims">Job Sims</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -190,10 +192,20 @@
   <div class="timeline" id="timeline"></div>
 </section>
 
-<!-- CERTIFICATIONS -->
-<section class="section dark-section" id="certifications">
+<!-- PROJECTS -->
+<section class="section dark-section" id="projects">
   <div class="sec-header">
     <div class="sec-label">// NODE_04</div>
+    <h2 class="sec-title">Projects</h2>
+    <div class="trace-line"></div>
+  </div>
+  <div class="projects-list" id="projects-list"></div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="section" id="certifications">
+  <div class="sec-header">
+    <div class="sec-label">// NODE_05</div>
     <h2 class="sec-title">Certifications</h2>
     <div class="trace-line"></div>
     <p class="certs-hint">Click any card to view certificate</p>
@@ -201,10 +213,21 @@
   <div class="certs-grid" id="certs-grid"></div>
 </section>
 
+<!-- JOB SIMULATIONS -->
+<section class="section dark-section" id="jobsims">
+  <div class="sec-header">
+    <div class="sec-label">// NODE_06</div>
+    <h2 class="sec-title">Job Simulations</h2>
+    <div class="trace-line"></div>
+    <p class="certs-hint">Click any card to view certificate</p>
+  </div>
+  <div class="jobsims-grid" id="jobsims-grid"></div>
+</section>
+
 <!-- CONTACT -->
 <section class="section" id="contact">
   <div class="sec-header">
-    <div class="sec-label">// NODE_05</div>
+    <div class="sec-label">// NODE_07</div>
     <h2 class="sec-title">Contact</h2>
     <div class="trace-line"></div>
   </div>
@@ -235,7 +258,7 @@
   <p>⚡ Designed &amp; Built by Vikas M — MedCircuit Portfolio</p>
 </footer>
 
-<!-- CERTIFICATE MODAL -->
+<!-- CERTIFICATE / PROJECT IMAGE MODAL -->
 <div class="modal-overlay" id="cert-modal" onclick="handleModalClick(event)">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">✕ CLOSE</button>
@@ -245,6 +268,17 @@
     <div class="modal-date" id="m-date"></div>
     <div class="modal-img-wrap">
       <img id="m-img" src="" alt="Certificate"/>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECT IMAGE LIGHTBOX -->
+<div class="modal-overlay" id="img-lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-box">
+    <button class="modal-close" onclick="closeLightboxBtn()">✕ CLOSE</button>
+    <div class="lightbox-caption" id="lb-caption"></div>
+    <div class="lightbox-img-wrap">
+      <img id="lb-img" src="" alt="Project output"/>
     </div>
   </div>
 </div>
