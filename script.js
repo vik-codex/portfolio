@@ -1,20 +1,20 @@
 // ── PARTICLES ────────────────────────────────────────────────────────────
 (function () {
-  const container = document.getElementById('particles');
+  var container = document.getElementById('particles');
   if (!container) return;
-  const colors = ['#00ff88', '#00d4ff', '#00ffcc', '#7b61ff', '#ff6b35'];
-  for (let i = 0; i < 38; i++) {
-    const p = document.createElement('div');
+  var colors = ['#00ff88', '#00d4ff', '#00ffcc', '#7b61ff', '#ff6b35'];
+  for (var i = 0; i < 38; i++) {
+    var p = document.createElement('div');
     p.className = 'particle';
-    const color = colors[Math.floor(Math.random() * colors.length)];
+    var color = colors[Math.floor(Math.random() * colors.length)];
     p.style.cssText = [
-      `left:${Math.random()*100}%`,
-      `width:${1+Math.random()*3}px`,
-      `height:${1+Math.random()*3}px`,
-      `background:${color}`,
-      `box-shadow:0 0 5px ${color}`,
-      `animation-duration:${9+Math.random()*13}s`,
-      `animation-delay:${Math.random()*12}s`
+      'left:'              + Math.random() * 100 + '%',
+      'width:'             + (1 + Math.random() * 3) + 'px',
+      'height:'            + (1 + Math.random() * 3) + 'px',
+      'background:'        + color,
+      'box-shadow:0 0 5px '+ color,
+      'animation-duration:'+ (9 + Math.random() * 13) + 's',
+      'animation-delay:'   + Math.random() * 12 + 's'
     ].join(';');
     container.appendChild(p);
   }
@@ -128,11 +128,18 @@ function typeLoop() {
   if (!deleting) {
     typedEl.textContent = current.slice(0, cIdx + 1);
     cIdx++;
-    if (cIdx === current.length) { deleting = true; setTimeout(typeLoop, 1800); return; }
+    if (cIdx === current.length) {
+      deleting = true;
+      setTimeout(typeLoop, 1800);
+      return;
+    }
   } else {
     typedEl.textContent = current.slice(0, cIdx - 1);
     cIdx--;
-    if (cIdx === 0) { deleting = false; tIdx = (tIdx + 1) % titles.length; }
+    if (cIdx === 0) {
+      deleting = false;
+      tIdx = (tIdx + 1) % titles.length;
+    }
   }
   setTimeout(typeLoop, deleting ? 38 : 68);
 }
@@ -157,7 +164,7 @@ function animateCount(el, target, duration) {
   }, 16);
 }
 
-// ── SKILLS ────────────────────────────────────────────────────────────────
+// ── BUILD SKILLS ──────────────────────────────────────────────────────────
 var skillsGrid = document.getElementById('skills-grid');
 d.skills.forEach(function (cat) {
   var card = document.createElement('div');
@@ -170,10 +177,11 @@ d.skills.forEach(function (cat) {
     '</div>' +
     '<div class="skill-tags">' +
       cat.items.map(function (item) {
-        return '<span class="skill-tag" style="color:' + cat.color + ';border-color:' + cat.color + '44;background:' + cat.color + '0e">' + item + '</span>';
+        return '<span class="skill-tag" style="color:' + cat.color +
+               ';border-color:' + cat.color + '44;background:' + cat.color + '0e">' +
+               item + '</span>';
       }).join('') +
     '</div>';
-
   card.addEventListener('mouseenter', function () {
     card.style.borderColor = cat.color;
     card.style.boxShadow   = '0 12px 38px ' + cat.color + '1e';
@@ -185,7 +193,7 @@ d.skills.forEach(function (cat) {
   skillsGrid.appendChild(card);
 });
 
-// ── EXPERIENCE ────────────────────────────────────────────────────────────
+// ── BUILD EXPERIENCE TIMELINE ─────────────────────────────────────────────
 var timeline = document.getElementById('timeline');
 d.experience.forEach(function (exp) {
   var item = document.createElement('div');
@@ -198,7 +206,9 @@ d.experience.forEach(function (exp) {
         '<span class="timeline-period">' + exp.period + '</span>' +
       '</div>' +
       '<div class="timeline-role">' + exp.role + '</div>' +
-      '<span class="timeline-type" style="color:' + exp.color + ';border-color:' + exp.color + '44;background:' + exp.color + '12">' + exp.type + '</span>' +
+      '<span class="timeline-type" style="color:' + exp.color +
+            ';border-color:' + exp.color + '44;background:' + exp.color + '12">' +
+            exp.type + '</span>' +
       '<ul class="timeline-points">' +
         exp.points.map(function (p) { return '<li>' + p + '</li>'; }).join('') +
       '</ul>' +
@@ -206,7 +216,54 @@ d.experience.forEach(function (exp) {
   timeline.appendChild(item);
 });
 
-// ── CERTIFICATIONS ────────────────────────────────────────────────────────
+// ── BUILD PROJECTS ────────────────────────────────────────────────────────
+var projectsList = document.getElementById('projects-list');
+if (projectsList && d.projects && d.projects.length > 0) {
+  d.projects.forEach(function (proj) {
+    var card = document.createElement('div');
+    card.className = 'project-card';
+
+    // Build image thumbnails HTML
+    var imagesHtml = '';
+    if (proj.images && proj.images.length > 0) {
+      imagesHtml = '<div class="project-images">' +
+        proj.images.map(function (img) {
+          return '<div class="project-img-thumb" onclick="openLightbox(\'' +
+            encodeURIComponent(img.src) + '\',\'' +
+            encodeURIComponent(img.caption) + '\')">' +
+            '<img src="' + img.src + '" alt="' + img.caption + '" loading="lazy"/>' +
+            '<div class="img-overlay">' +
+              '<div class="img-caption">' + img.caption + '</div>' +
+            '</div>' +
+          '</div>';
+        }).join('') +
+      '</div>';
+    }
+
+    // Build tags HTML
+    var tagsHtml = (proj.tags || []).map(function (tag) {
+      return '<span class="project-tag" style="color:' + proj.color +
+             ';border-color:' + proj.color + '44;background:' + proj.color + '0e">' +
+             tag + '</span>';
+    }).join('');
+
+    card.innerHTML =
+      '<div class="project-header" style="border-left:4px solid ' + proj.color + '">' +
+        '<div class="project-icon">' + proj.icon + '</div>' +
+        '<div class="project-title-wrap">' +
+          '<div class="project-title" style="color:' + proj.color + '">' + proj.title + '</div>' +
+          '<div class="project-tags">' + tagsHtml + '</div>' +
+        '</div>' +
+        '<a href="' + proj.github + '" target="_blank" class="project-github">⚡ GitHub ↗</a>' +
+      '</div>' +
+      '<p class="project-desc">' + proj.desc + '</p>' +
+      imagesHtml;
+
+    projectsList.appendChild(card);
+  });
+}
+
+// ── BUILD CERTIFICATIONS ──────────────────────────────────────────────────
 var certsGrid = document.getElementById('certs-grid');
 d.certifications.forEach(function (cert, i) {
   var card = document.createElement('div');
@@ -219,42 +276,125 @@ d.certifications.forEach(function (cert, i) {
       '<div class="cert-issuer">' + cert.issuer + '</div>' +
       '<div class="cert-date">'   + cert.date   + '</div>' +
     '</div>';
-  card.addEventListener('click', function () { openModal(cert); });
+  card.addEventListener('click', function () { openCertModal(cert); });
   certsGrid.appendChild(card);
 });
 
-// ── MODAL ─────────────────────────────────────────────────────────────────
-var modal = document.getElementById('cert-modal');
+// ── BUILD JOB SIMULATIONS ─────────────────────────────────────────────────
+var jobsimsGrid = document.getElementById('jobsims-grid');
+if (jobsimsGrid && d.jobSimulations && d.jobSimulations.length > 0) {
+  d.jobSimulations.forEach(function (sim, i) {
+    var card = document.createElement('div');
+    card.className = 'jobsim-card';
+    card.style.transitionDelay = (i * 0.1) + 's';
+    card.style.borderTop = '3px solid ' + sim.color;
 
-function openModal(cert) {
+    var footerRight = sim.certImage
+      ? '<span class="jobsim-view">🔍 VIEW CERT</span>'
+      : '<span class="jobsim-no-cert">Certificate pending</span>';
+
+    card.innerHTML =
+      '<div class="jobsim-header">' +
+        '<div class="jobsim-icon">' + sim.icon + '</div>' +
+        '<div>' +
+          '<div class="jobsim-company" style="color:' + sim.color + '">' + sim.company + '</div>' +
+          '<div class="jobsim-role">' + sim.role + '</div>' +
+          '<div class="jobsim-period">' + sim.period + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<p class="jobsim-desc">' + sim.desc + '</p>' +
+      '<div class="jobsim-footer">' +
+        '<span class="jobsim-badge" style="color:' + sim.color +
+              ';border-color:' + sim.color + '55;background:' + sim.color + '12">' +
+              'Job Simulation' +
+        '</span>' +
+        footerRight +
+      '</div>';
+
+    // Only open modal if there is a cert image
+    if (sim.certImage) {
+      card.addEventListener('click', function () {
+        openCertModal({
+          icon:      sim.icon,
+          name:      sim.role,
+          issuer:    sim.company,
+          date:      sim.period,
+          certImage: sim.certImage
+        });
+      });
+    }
+
+    jobsimsGrid.appendChild(card);
+  });
+}
+
+// ── CERT MODAL ────────────────────────────────────────────────────────────
+var certModal = document.getElementById('cert-modal');
+
+function openCertModal(cert) {
   document.getElementById('m-icon').textContent   = cert.icon;
   document.getElementById('m-name').textContent   = cert.name;
   document.getElementById('m-issuer').textContent = cert.issuer;
   document.getElementById('m-date').textContent   = cert.date;
-  document.getElementById('m-img').src            = cert.certImage;
-  modal.classList.add('open');
+  var img = document.getElementById('m-img');
+  if (cert.certImage) {
+    img.src          = cert.certImage;
+    img.style.display = 'block';
+  } else {
+    img.src          = '';
+    img.style.display = 'none';
+  }
+  certModal.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
 function handleModalClick(e) {
-  if (e.target === modal) closeModal();
+  if (e.target === certModal) closeModal();
 }
 
 function closeModal() {
-  modal.classList.remove('open');
+  certModal.classList.remove('open');
   document.body.style.overflow = '';
 }
 
+// ── IMAGE LIGHTBOX ────────────────────────────────────────────────────────
+var lightbox = document.getElementById('img-lightbox');
+
+function openLightbox(encodedSrc, encodedCaption) {
+  var src     = decodeURIComponent(encodedSrc);
+  var caption = decodeURIComponent(encodedCaption);
+  document.getElementById('lb-img').src         = src;
+  document.getElementById('lb-caption').textContent = caption;
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(e) {
+  if (e.target === lightbox) closeLightboxBtn();
+}
+
+function closeLightboxBtn() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── ESCAPE KEY closes any open modal ─────────────────────────────────────
 document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') closeModal();
+  if (e.key === 'Escape') {
+    closeModal();
+    closeLightboxBtn();
+  }
 });
 
 // ── INTERSECTION OBSERVER ─────────────────────────────────────────────────
 var statsDone = false;
-var observer  = new IntersectionObserver(function (entries) {
+
+var observer = new IntersectionObserver(function (entries) {
   entries.forEach(function (entry) {
     if (!entry.isIntersecting) return;
     entry.target.classList.add('visible');
+
+    // Trigger stat counters once when about section appears
     if (entry.target.id === 'about' && !statsDone) {
       statsDone = true;
       setTimeout(function () {
@@ -266,8 +406,10 @@ var observer  = new IntersectionObserver(function (entries) {
   });
 }, { threshold: 0.12 });
 
-document.querySelectorAll('.timeline-item, .cert-card').forEach(function (el) {
+// Observe all animated elements
+document.querySelectorAll('.timeline-item, .cert-card, .project-card, .jobsim-card').forEach(function (el) {
   observer.observe(el);
 });
+
 var aboutEl = document.getElementById('about');
 if (aboutEl) observer.observe(aboutEl);
