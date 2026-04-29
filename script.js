@@ -1,8 +1,5 @@
 /* ============================================================
    script.js — Vikas M Portfolio
-   Works with data.js variables:
-   TITLES, ABOUT_TEXT, STATS, SKILLS, TIMELINE,
-   PROJECTS, CERTS, JOB_SIMS
    ============================================================ */
 
 /* ── Particles ─────────────────────────────────────────────── */
@@ -35,14 +32,12 @@
   }
   resize();
   window.addEventListener('resize', resize);
-
   const nodes = Array.from({length: 18}, () => ({
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
     vx: (Math.random() - 0.5) * 0.4,
     vy: (Math.random() - 0.5) * 0.4
   }));
-
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     nodes.forEach(n => {
@@ -71,7 +66,7 @@
 /* ── Typed text ─────────────────────────────────────────────── */
 (function initTyped() {
   const el = document.getElementById('typed-text');
-  if (!el || !window.TITLES || !TITLES.length) return;
+  if (!el || typeof TITLES === 'undefined' || !TITLES.length) return;
   let ti = 0, ci = 0, deleting = false;
   function tick() {
     const word = TITLES[ti];
@@ -91,9 +86,7 @@
 (function initHR() {
   const el = document.getElementById('hr-val');
   if (!el) return;
-  setInterval(() => {
-    el.textContent = 68 + Math.floor(Math.random() * 10);
-  }, 1200);
+  setInterval(() => { el.textContent = 68 + Math.floor(Math.random() * 10); }, 1200);
 })();
 
 /* ── Navbar scroll ──────────────────────────────────────────── */
@@ -110,11 +103,16 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
+/* ── Escape helper ──────────────────────────────────────────── */
+function escQ(str) {
+  return (str || '').replace(/'/g, "\\'");
+}
+
 /* ── About text ─────────────────────────────────────────────── */
-(function fillAbout() {
+function fillAbout() {
   const el = document.getElementById('about-text');
-  if (el && window.ABOUT_TEXT) el.textContent = ABOUT_TEXT;
-})();
+  if (el && typeof ABOUT_TEXT !== 'undefined') el.textContent = ABOUT_TEXT;
+}
 
 /* ── Animated stat counters ─────────────────────────────────── */
 function animateCounter(el, target, suffix) {
@@ -128,12 +126,12 @@ function animateCounter(el, target, suffix) {
 }
 
 function initCounters() {
-  const map = [
-    { id: 'stat-internships', val: (window.STATS && STATS.internships) || 4,  suffix: '+' },
-    { id: 'stat-certs',       val: (window.STATS && STATS.certs)       || 9,  suffix: '+' },
-    { id: 'stat-skills',      val: (window.STATS && STATS.skills)      || 30, suffix: '+' }
-  ];
-  map.forEach(({id, val, suffix}) => {
+  const s = (typeof STATS !== 'undefined') ? STATS : {internships:4, certs:9, skills:30};
+  [
+    { id: 'stat-internships', val: s.internships, suffix: '+' },
+    { id: 'stat-certs',       val: s.certs,       suffix: '+' },
+    { id: 'stat-skills',      val: s.skills,      suffix: '+' }
+  ].forEach(({id, val, suffix}) => {
     const el = document.getElementById(id);
     if (el) animateCounter(el, val, suffix);
   });
@@ -142,7 +140,7 @@ function initCounters() {
 /* ── Skills grid ────────────────────────────────────────────── */
 function buildSkills() {
   const grid = document.getElementById('skills-grid');
-  if (!grid || !window.SKILLS) return;
+  if (!grid || typeof SKILLS === 'undefined') return;
   grid.innerHTML = SKILLS.map(cat => `
     <div class="skill-card">
       <div class="skill-cat-icon">${cat.icon}</div>
@@ -157,7 +155,7 @@ function buildSkills() {
 /* ── Timeline ───────────────────────────────────────────────── */
 function buildTimeline() {
   const tl = document.getElementById('timeline');
-  if (!tl || !window.TIMELINE) return;
+  if (!tl || typeof TIMELINE === 'undefined') return;
   tl.innerHTML = TIMELINE.map((item, i) => `
     <div class="tl-item ${i % 2 === 0 ? 'tl-left' : 'tl-right'}">
       <div class="tl-dot"></div>
@@ -177,7 +175,7 @@ function buildTimeline() {
 /* ── Projects ───────────────────────────────────────────────── */
 function buildProjects() {
   const list = document.getElementById('projects-list');
-  if (!list || !window.PROJECTS) return;
+  if (!list || typeof PROJECTS === 'undefined') return;
   list.innerHTML = PROJECTS.map(p => `
     <div class="project-card">
       <div class="proj-icon">${p.icon}</div>
@@ -202,7 +200,7 @@ function buildProjects() {
 /* ── Certifications ─────────────────────────────────────────── */
 function buildCerts() {
   const grid = document.getElementById('certs-grid');
-  if (!grid || !window.CERTS) return;
+  if (!grid || typeof CERTS === 'undefined') return;
   grid.innerHTML = CERTS.map(c => `
     <div class="cert-card" onclick="openModal('${c.img}','${c.icon}','${escQ(c.name)}','${escQ(c.issuer)}','${c.date}')">
       <div class="cert-icon">${c.icon}</div>
@@ -218,9 +216,10 @@ function buildCerts() {
 /* ── Job Simulations ────────────────────────────────────────── */
 function buildJobSims() {
   const grid = document.getElementById('jobsims-grid');
-  if (!grid || !window.JOB_SIMS) return;
+  if (!grid || typeof JOB_SIMS === 'undefined') return;
   grid.innerHTML = JOB_SIMS.map(j => `
-    <div class="jobsim-card" style="border-top:3px solid ${j.color}" onclick="${j.img ? `openModal('${j.img}','${j.icon}','${escQ(j.role)}','${escQ(j.company)}','${j.period}')` : ''}">
+    <div class="jobsim-card" style="border-top:3px solid ${j.color}"
+         onclick="${j.img ? `openModal('${j.img}','${j.icon}','${escQ(j.role)}','${escQ(j.company)}','${j.period}')` : ''}">
       <div class="js-header">
         <span class="js-icon">${j.icon}</span>
         <div>
@@ -238,7 +237,7 @@ function buildJobSims() {
   `).join('');
 }
 
-/* ── Modal (cert viewer) ────────────────────────────────────── */
+/* ── Modal ──────────────────────────────────────────────────── */
 function openModal(imgSrc, icon, name, issuer, date) {
   document.getElementById('m-icon').textContent   = icon   || '';
   document.getElementById('m-name').textContent   = name   || '';
@@ -260,7 +259,7 @@ function handleModalClick(e) {
   if (e.target === document.getElementById('cert-modal')) closeModal();
 }
 
-/* ── Lightbox (project images) ──────────────────────────────── */
+/* ── Lightbox ───────────────────────────────────────────────── */
 function openLightbox(src, caption) {
   document.getElementById('lb-img').src = src;
   document.getElementById('lb-caption').textContent = caption || '';
@@ -277,37 +276,46 @@ function closeLightboxBtn() {
   document.body.style.overflow = '';
 }
 
-/* ── Escape helper for onclick strings ──────────────────────── */
-function escQ(str) {
-  return (str || '').replace(/'/g, "\\'");
-}
-
-/* ── Intersection Observer — animate on scroll ──────────────── */
-function observeSections() {
-  const opts = { threshold: 0.08 };
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        if (entry.target.id === 'about') initCounters();
-      }
-    });
-  }, opts);
-  document.querySelectorAll('.section, .tl-item, .skill-card, .cert-card, .project-card, .jobsim-card')
-    .forEach(el => { el.classList.add('fade-in'); io.observe(el); });
-}
-
-/* ── Keyboard: Escape closes modals ────────────────────────── */
+/* ── Keyboard ───────────────────────────────────────────────── */
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { closeModal(); closeLightboxBtn(); }
 });
 
-/* ── INIT — run everything once DOM is ready ────────────────── */
-document.addEventListener('DOMContentLoaded', () => {
+/* ── MAIN INIT ──────────────────────────────────────────────── */
+/* Runs after full page load so all data.js variables are ready */
+window.addEventListener('load', function() {
+
+  /* 1. Fill all sections with data */
+  fillAbout();
   buildSkills();
   buildTimeline();
   buildProjects();
   buildCerts();
   buildJobSims();
-  observeSections();
+
+  /* 2. Fire counters immediately — no need to wait for scroll */
+  initCounters();
+
+  /* 3. Simple fade-in on scroll — set up AFTER content exists */
+  const fadeEls = document.querySelectorAll(
+    '.section, .skill-card, .cert-card, .project-card, .jobsim-card, .tl-item'
+  );
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.07 });
+
+  fadeEls.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+    io.observe(el);
+  });
+
 });
