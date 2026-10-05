@@ -217,3 +217,4 @@ const JOB_SIMS = [
     img: "certs/siemens.jpg"
   }
 ];
+// GitHub Pages deployment refresh
