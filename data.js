@@ -57,13 +57,6 @@ const TIMELINE = [
     tags: ["Software Development", "JavaScript", "Python"]
   },
   {
-    role: "Embedded Systems Intern",
-    company: "IITB (Remote)",
-    period: "Oct 2025 – Dec 2025",
-    desc: "Developed STM32-based firmware for real-time sensor data acquisition and UART transmission. Interfaced multiple sensors and validated signal integrity.",
-    tags: ["STM32", "UART", "C", "Firmware"]
-  },
-  {
     role: "PCB and Embedded Sensor Student Intern",
     company: "MSRIT",
     period: "Aug 2025 – Sep 2025",
