@@ -14,9 +14,9 @@ const TITLES = [
   "Python · SciPy · MATLAB"
 ];
 
-const ABOUT_TEXT = "I'm Vikas M, a Medical Electronics Engineering student at MSRIT, Bengaluru, passionate about building intelligent healthcare systems. I specialise in embedded systems, biomedical signal processing, and IoT-based health monitoring devices. With 4+ internships spanning data analytics, embedded firmware, IoT research, and AI, plus 10+ certifications from Google, Intel, AWS, Oracle, and more — I sit at the intersection of hardware intelligence and digital health. Currently open to full-time roles and impactful collaborations.";
+const ABOUT_TEXT = "I'm Vikas M, a Medical Electronics Engineering student at MSRIT, Bengaluru, passionate about building intelligent healthcare systems. I specialise in embedded systems, biomedical signal processing, and IoT-based health monitoring devices. With 5+ internships spanning data analytics, embedded firmware, IoT research, AI, and medical equipment, plus 10+ certifications from Google, Intel, AWS, Oracle, and more — I sit at the intersection of hardware intelligence and digital health. Currently open to full-time roles and impactful collaborations.";
 
-const STATS = { internships: 4, certs: 10, skills: 30 };
+const STATS = { internships: 5, certs: 10, skills: 30 };
 
 const SKILLS = [
   { category: "Programming",         icon: "💻", items: ["Python", "C", "C++", "JavaScript", "MATLAB"] },
@@ -92,11 +92,11 @@ const TIMELINE = [
     tags: ["Operations", "Sales", "Equipment Management"]
   },
   {
-    role: "Medical Equipments Intern",
+    role: "Medical Electronics Engineering Intern",
     company: "Adhventha Hospital",
-    period: "Aug 2026 – Sep 2026",
-    desc: "Worked with medical equipment handling and maintenance, with exposure to biomedical equipment and hospital safety.",
-    tags: ["Medical Equipment", "Biomedical Equipment", "Hospital Safety"]
+    period: "Sep 1 – Sep 30, 2026",
+    desc: "Completed a 30-day internship with hands-on exposure to 29 medical equipment systems across critical care, imaging, diagnostics, laboratory, OT, and sterilization. Learned equipment working principles, handling, preventive maintenance, troubleshooting concepts, calibration, radiation safety, and hospital equipment safety.",
+    tags: ["Medical Equipment", "Preventive Maintenance", "Troubleshooting", "Radiation Safety", "Hospital Safety"]
   },
   {
     role: "College Ambassador",
